@@ -4,10 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 
@@ -27,17 +30,15 @@ public class Produto {
     @Size (max = 255)
     private String marca;
 
-    @NotNull
-    @Size (max = 255)
+    @NotNull    
     private int quantidade;
 
     @NotNull
-    @Size (max = 255)
-    private float preco;
+    private double preco;
 
-    //@ManyToOne 
-    //@JsonIgnoreProperties ("produto")
-    //private Produto produto;
+    @ManyToOne 
+    @JsonIgnoreProperties ("produto")
+    private Categoria categoria;
 
 
     public long getId() {
@@ -72,20 +73,22 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public float getPreco() {
+    public double getPreco() {
         return this.preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 
-    /*public Produto getProduto() {
-        return this.produto;
-    }
+	public Categoria getCategoria() {
+		return categoria;
+	}
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }*/
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+  
 
 }
